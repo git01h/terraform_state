@@ -12,7 +12,7 @@ terraform {
 }
 
 resource "azurerm_resource_group" "example" {
-  name     = "example"
-  location = "westus2"
+  name     = var.rg_location
+  location = var.rg_name
 }
 
