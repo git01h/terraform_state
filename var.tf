@@ -1,6 +1,6 @@
 variable "rg_name" {
   type        = any
-  default     = "Harsh_terraform"
+  default     = "example"
   description = "The name of the resource group in which to create the subnet. Changing this forces a new resource to be created."
 }
 variable "rg_location" {
