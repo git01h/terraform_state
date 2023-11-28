@@ -83,13 +83,13 @@ pipeline {
           //terraform_state_option =params.Arguments.split()[0]
 
  	stage ('terraform state'){
-		def terraformStateAction = params.Arguments.split(' ')[0]
-                def terraformStateResource = params.Arguments.split(' ')[1]
  	when{
  		expression{choice == 'State' && params.Arguments != " "}
  	}
  	steps {
             script {
+		    def terraformStateAction = params.Arguments.split(' ')[0]
+                def terraformStateResource = params.Arguments.split(' ')[1]
                stage("Terraform state ${terraformStateAction}")
 
     if (terraformStateAction == 'list') {
