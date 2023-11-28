@@ -9,6 +9,7 @@ pipeline {
         ARM_TENANT_ID = credentials('TENANT_ID')
         ARM_CLIENT_ID = credentials('CLIENT_ID')
         ARM_CLIENT_SECRET = credentials('CLIENT_SECRET')
+        TFVARS_FILE = 'terraform.tfvars'
     }
     stages {
         stage('Checkout') {
@@ -39,7 +40,7 @@ pipeline {
 	}
             steps {
                 script {
-                    sh 'terraform plan -out=plan.out'
+                    sh "terraform plan -var-file=${TFVARS_FILE} -out=plan.out"
                 }
 			}
         }
@@ -53,7 +54,7 @@ pipeline {
         script {
 		input "Please approve to proceed with Apply"
             // Run Terraform apply using the saved plan file
-            sh 'terraform apply "plan.out"'
+            sh "terraform apply -var-file=${TFVARS_FILE} plan.out"
         }
     }
       }
