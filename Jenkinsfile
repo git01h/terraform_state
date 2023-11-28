@@ -54,7 +54,7 @@ pipeline {
         script {
 		input "Please approve to proceed with Apply"
             // Run Terraform apply using the saved plan file
-            sh "terraform apply -var-file=${TFVARS_FILE} plan.out"
+            sh 'terraform apply "plan.out"'
         }
     }
       }
