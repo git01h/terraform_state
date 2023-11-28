@@ -82,7 +82,7 @@ pipeline {
 	      //if (choice == 'State'){
           //terraform_state_option =params.Arguments.split()[0]
 
- 	stage ('terraform state'){
+ 	stage ('Terraform state'){
  	when{
  		expression{choice == 'State' && params.Arguments != " "}
  	}
