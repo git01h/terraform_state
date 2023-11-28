@@ -2,7 +2,9 @@ pipeline {
     agent any
     options {
   ansiColor('css')
-}
+ }
+ def terraformStateAction = params.Arguments.split(' ')[0]
+ def terraformStateResource = params.Arguments.split(' ')[1]
     environment {
        // Define environment variables for Azure credentials
         ARM_SUBSCRIPTION_ID = credentials('SUBSCRIPTION_ID')
@@ -56,7 +58,7 @@ pipeline {
             sh 'terraform apply "plan.out"'
         }
     }
-}
+      }
         stage('terraform destroy') {
 		when{
 		
@@ -79,17 +81,16 @@ pipeline {
                 }
             }
         }
-	    //if (choice == 'State'){
-//terraform_state_option =params.Arguments.split()[0]
+	      //if (choice == 'State'){
+          //terraform_state_option =params.Arguments.split()[0]
 
  	stage ('terraform state'){
  	when{
  		expression{choice == 'State' && params.Arguments != " "}
  	}
  	steps {
-                 script {
-    def terraformStateAction = params.Arguments.split(' ')[0]
-    def terraformStateResource = params.Arguments.split(' ')[1]
+            script {
+               stage("Terraform state ${terraformStateAction}")
 
     if (terraformStateAction == 'list') {
         sh 'terraform state list'
@@ -102,7 +103,7 @@ pipeline {
     } else {
         error "Invalid terraformStateAction: ${terraformStateAction}. Supported actions are 'list', 'show', and 'rm'."
     }
-}
+ }
 
 	 
 
@@ -111,7 +112,8 @@ pipeline {
     
  }
 }
-    
+
+   
 
 
     
