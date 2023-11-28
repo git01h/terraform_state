@@ -1,4 +1,4 @@
-rg_location="North Europe"
+rg_location="East Asia"
 
 
 
