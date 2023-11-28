@@ -40,7 +40,7 @@ pipeline {
 	}
             steps {
                 script {
-                    sh "terraform plan -var-file=${TFVARS_FILE} -out=plan.out"
+                    sh 'terraform apply "plan.out"'
                 }
 			}
         }
