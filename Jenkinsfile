@@ -3,8 +3,6 @@ pipeline {
     options {
   ansiColor('css')
  }
- def terraformStateAction = params.Arguments.split(' ')[0]
- def terraformStateResource = params.Arguments.split(' ')[1]
     environment {
        // Define environment variables for Azure credentials
         ARM_SUBSCRIPTION_ID = credentials('SUBSCRIPTION_ID')
@@ -13,6 +11,8 @@ pipeline {
         ARM_CLIENT_SECRET = credentials('CLIENT_SECRET')
     }
     stages {
+	    def terraformStateAction = params.Arguments.split(' ')[0]
+ def terraformStateResource = params.Arguments.split(' ')[1]
         stage('Checkout') {
             steps {
                 echo 'Checking out code from Git'
