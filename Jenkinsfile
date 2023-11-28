@@ -90,7 +90,7 @@ pipeline {
             script {
 		    def terraformStateAction = params.Arguments.split(' ')[0]
                 def terraformStateResource = params.Arguments.split(' ')[1]
-               stage("Terraform state ${terraformStateAction}")
+               stage(" ${terraformStateAction}")
 
     if (terraformStateAction == 'list') {
         sh 'terraform state list'
