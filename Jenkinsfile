@@ -1,16 +1,15 @@
 parameters{
 choice(name: 'choice', choices: ['Plan', 'Apply', 'Destroy','State','Import'], description: 'Select Terraform Action')
 string (description: 'Type the Argument',name: 'Arguments')
-
+choice(name: 'ENVIRONMENT',choices: ['terraform', 'dev', 'prod','staging']  description: 'Environment: dev, staging, prod, etc.')
 }
+
 pipeline {
     agent any
     options {
   ansiColor('css')
  }
- parameters {
-        string(name: 'ENVIRONMENT',  description: 'Environment: dev, staging, prod, etc.')
-    }
+ 
     environment {
        // Define environment variables for Azure credentials
         ARM_SUBSCRIPTION_ID = credentials('SUBSCRIPTION_ID')
