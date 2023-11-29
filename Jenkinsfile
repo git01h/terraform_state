@@ -49,7 +49,7 @@ pipeline {
             steps {
                 script {
                         //ENVIRONMENT parameter to select the appropriate .tfvars file
-                    def tfvarsFile = "${params.ENVIRONMENT}.tfvars"
+                    def tfvarsFile = "${params.Envtronment}.tfvars"
                     sh "terraform plan -var-file=${tfvarsFile} -out=plan.out"
                 }
 			}
