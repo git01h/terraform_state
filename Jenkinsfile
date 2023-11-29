@@ -1,7 +1,7 @@
 parameters {
   choice choices: ['Plan', 'Apply', 'Destroy', 'State', 'import'], description: 'Select Terraform Action', name: 'choice'
   choice choices: ['Dev', 'Sbx', 'terraform'], description: 'Select Environment', name: 'Environment'
-  string description: 'Type the Argument', name: 'Arguments'
+  
 }
 
 
@@ -10,6 +10,9 @@ pipeline {
     options {
   ansiColor('css')
  }
+ parameters {
+        string(name: 'ENVIRONMENT', description: 'Environment: dev, staging, prod, etc.')
+    }
  
     environment {
        // Define environment variables for Azure credentials
@@ -49,7 +52,7 @@ pipeline {
             steps {
                 script {
                         //ENVIRONMENT parameter to select the appropriate .tfvars file
-                    def tfvarsFile = "${params.Envtronment}.tfvars"
+                    def tfvarsFile = "${params.ENVIRONMENT}.tfvars"
                     sh "terraform plan -var-file=${tfvarsFile} -out=plan.out"
                 }
 			}
