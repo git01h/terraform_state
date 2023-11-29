@@ -17,8 +17,8 @@ resource "azurerm_resource_group" "example" {
 }
 resource "azurerm_storage_account" "storage" {
   name                     = var.sa_name
-  resource_group_name      = azurerm_resource_group.az.name
-  location                 = azurerm_resource_group.az.location
+  resource_group_name      = azurerm_resource_group.example.name
+  location                 = azurerm_resource_group.example.location
   account_tier             = var.sa_account_tier
   account_replication_type = var.account_replication_type
 }
