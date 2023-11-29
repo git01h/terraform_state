@@ -1,16 +1,19 @@
+properties([parameters([choice(name: 'choice', choices: ['Plan', 'Apply', 'Destroy'], description: 'Select Terraform Action')])])
 pipeline {
     agent any
     options {
   ansiColor('css')
  }
+ parameters {
+        string(name: 'ENVIRONMENT',  description: 'Environment: dev, staging, prod, etc.')
+    }
     environment {
        // Define environment variables for Azure credentials
         ARM_SUBSCRIPTION_ID = credentials('SUBSCRIPTION_ID')
         ARM_TENANT_ID = credentials('TENANT_ID')
         ARM_CLIENT_ID = credentials('CLIENT_ID')
         ARM_CLIENT_SECRET = credentials('CLIENT_SECRET')
-        TFVARS_FILE = 'terraform.tfvars'
-	BACKEND_CONFIG_FILE = 'backend.tf'
+	 BACKEND_CONFIG_FILE = 'backend.tf'
     }
     stages {
         stage('Checkout') {
@@ -41,7 +44,9 @@ pipeline {
 	}
             steps {
                 script {
-                    sh "terraform plan -var-file=${TFVARS_FILE} -out=plan.out"
+                        //ENVIRONMENT parameter to select the appropriate .tfvars file
+                    def tfvarsFile = "${params.ENVIRONMENT}.tfvars"
+                    sh "terraform plan -var-file=${tfvarsFile} -out=plan.out"
                 }
 			}
         }
