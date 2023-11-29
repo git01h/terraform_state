@@ -24,7 +24,7 @@ resource "azurerm_storage_account" "storage" {
 }
 resource "azurerm_storage_container" "example" {
   name                  = var.sc_name
-  storage_account_name  = azurerm_storage_account.example.name
+  storage_account_name  = azurerm_storage_account.storage.name
   container_access_type = var.container_access_type
 }
 
