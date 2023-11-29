@@ -23,7 +23,6 @@ pipeline {
         stage('Terraform init') {
             steps {
                 script {
-			sh 'az account show'
                     sh 'terraform init -backend-config="key=root.terraform.tfstate"'
                 }
             }
