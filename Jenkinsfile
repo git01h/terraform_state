@@ -10,6 +10,7 @@ pipeline {
         ARM_CLIENT_ID = credentials('CLIENT_ID')
         ARM_CLIENT_SECRET = credentials('CLIENT_SECRET')
         TFVARS_FILE = 'terraform.tfvars'
+	BACKEND_CONFIG_FILE = 'backend.tf'
     }
     stages {
         stage('Checkout') {
