@@ -22,4 +22,9 @@ resource "azurerm_storage_account" "storage" {
   account_tier             = var.sa_account_tier
   account_replication_type = var.account_replication_type
 }
+resource "azurerm_storage_container" "example" {
+  name                  = var.sc_name
+  storage_account_name  = azurerm_storage_account.example.name
+  container_access_type = var.container_access_type
+}
 

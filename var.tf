@@ -23,4 +23,14 @@ variable "account_replication_type" {
   //default     = "LRS"
   description = "Defines the type of replication to use for this storage account"
 }
+variable "sc_name" {
+  type        = string
+  
+  description = "The name of the Container which should be created within the Storage Account. Changing this forces a new resource to be created"
+}
+variable "container_access_type" {
+  type        = string
+  
+  description = "The Access Level configured for this Container"
+}
 
