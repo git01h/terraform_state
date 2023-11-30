@@ -33,7 +33,7 @@ pipeline {
         stage('Terraform init') {
             steps {
                 script {
-                    sh 'terraform init -backend-config="key=root.terraform.tfstate"'
+                    sh "'terraform init -backend-config={params.ENVIRONMENT}.tfstate"'
                 }
             }
         }
